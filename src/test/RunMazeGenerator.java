@@ -1,12 +1,9 @@
 package test;
 
-import algoritgms.mazeGenerators.EmptyMazeGenerator;
-import algoritgms.mazeGenerators.IMazeGenerator;
-import algoritgms.mazeGenerators.MyMazeGenerator;
-import algoritgms.mazeGenerators.SimpleMazeGenerator;
+import algoritgms.mazeGenerators.*;
+//import algorithms.mazeGenerators.*;
 
 public class RunMazeGenerator {
-    import algorithms.mazeGenerators.*;
 
 
         public static void main(String[] args) {
@@ -34,4 +31,4 @@ public class RunMazeGenerator {
             System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
         }
     }
-}
+
