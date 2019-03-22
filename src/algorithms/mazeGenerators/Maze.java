@@ -1,4 +1,4 @@
-package algoritgms.mazeGenerators;
+package algorithms.mazeGenerators;
 
 public class Maze   {
     public void print() {

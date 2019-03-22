@@ -1,4 +1,4 @@
-package algoritgms.mazeGenerators;
+package algorithms.mazeGenerators;
 
 public interface IMazeGenerator {
     Object measureAlgorithmTimeMillis(int i, int i1);

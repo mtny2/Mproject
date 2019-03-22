@@ -1,4 +1,4 @@
-package algoritgms.mazeGenerators;
+package algorithms.mazeGenerators;
 
 public abstract class AMazeGenerator implements IMazeGenerator{
 }

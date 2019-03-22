@@ -1,6 +1,7 @@
 package test;
 
 import algoritgms.mazeGenerators.*;
+import algorithms.mazeGenerators.*;
 //import algorithms.mazeGenerators.*;
 
 public class RunMazeGenerator {
