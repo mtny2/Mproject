@@ -1,4 +1,5 @@
 package algoritgms;
 
-public class bnnf {
+public class Maze {
+
 }
