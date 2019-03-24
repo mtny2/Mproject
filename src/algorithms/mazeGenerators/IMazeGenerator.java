@@ -1,7 +1,9 @@
 package algorithms.mazeGenerators;
 
 public interface IMazeGenerator {
-    Object measureAlgorithmTimeMillis(int i, int i1);
 
-    Maze generate(int i, int i1);
+    Maze generate(int rows, int columns);
+
+    long measureAlgorithmTimeMillis(int rows, int columns);
+
 }
