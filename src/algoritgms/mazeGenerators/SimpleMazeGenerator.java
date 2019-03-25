@@ -1,39 +1,6 @@
 package algoritgms.mazeGenerators;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 public class SimpleMazeGenerator extends AMazeGenerator {
     private Maze myMaze;
     //make the all array 1= Black.
