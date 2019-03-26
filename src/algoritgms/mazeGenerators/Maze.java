@@ -1,218 +1,76 @@
-package algoritgms.mazeGenerators;
+package algorithms.mazeGenerators;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+public class Maze   {
 
-public class Maze {
-
-    public int rows;
-    public int colums;
-    public int maze[][];
+    private String[][] myMaze;
+    private Position startPosition;
+    private Position goalPosition;
 
 
-    public Maze (int arr[][],int rows,int colums){
+    public Maze(int row, int column) {
+        // if (row < 2)
+        //     row = 10;
+        // if (column < 2)
+        //     column = 10;
+        myMaze = new String[row][column];
+        startPosition = new Position(0, 0); //default start = (0,0)
 
-        int newMaze[][] = new int[rows][colums];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < colums; j++) {
-
-                this.maze[i][j] =arr[i][j] ;
-            }
-        }
-        this.maze=newMaze;
     }
 
-    public static class MyMazeGenerator2 extends AMazeGenerator {
-        private Maze myMaze;
-        private Position[][] cells;
-        private List<Position> candidates;
+    public Position getStartPosition() {
 
-        /**
-         * constructor
-         */
+        return startPosition;
+    }
 
-        public MyMazeGenerator2() {
+    public Position getGoalPosition() {
+        return goalPosition;
+    }
 
-            candidates = new ArrayList<Position>();
+    public void setStartPosition(Position startPosition) {
+        if (startPosition.getRowIndex() < this.numOfRows() && startPosition.getColumnIndex() < this.numOfColumns())
+            if (startPosition.getColumnIndex() >= 0 && startPosition.getRowIndex() >= 0)
+                this.startPosition = startPosition;
+    }
+
+    public void setGoalPosition(Position goalPosition) {
+        if (goalPosition.getRowIndex() < this.numOfRows() && goalPosition.getColumnIndex() < this.numOfColumns())
+            if (goalPosition.getColumnIndex() >= 0 && goalPosition.getRowIndex() >= 0)
+                this.goalPosition = goalPosition;
+    }
+
+
+    public int numOfRows() {
+        return myMaze.length;
+    }
+
+    public int numOfColumns() {
+        return myMaze[0].length;
+    }
+
+    public void changeCellValue(int row, int column, String value) {
+        if (value=="0" || value=="1" || value=="2" || value==" ")
+            if (row < numOfRows() && column < numOfColumns() && row >= 0 && column >= 0)
+                myMaze[row][column] = value;
+    }
+
+
+
+    public String getCellValue(int row, int column) {
+        return myMaze[row][column];
+    }
+
+
+    public void print() {
+        for (int i = 0; i < myMaze.length; i++) {
+            System.out.println(" "); //go down at end of line of array
+            for (int j = 0; j < myMaze[0].length; j++)
+                if (i == startPosition.getRowIndex() && j == startPosition.getColumnIndex())
+                    System.out.print(" S"); //start position
+                else if (i == goalPosition.getRowIndex() && j == goalPosition.getColumnIndex())
+                    System.out.print(" E"); //end position
+                else
+                    System.out.print(" " + myMaze[i][j]); //print if 0 or 1 and add space
         }
-
-        /**
-         * generate a maze with all 1's
-         *
-         * @param columns - columns of maze
-         * @param rows    - rows of maze
-         */
-
-        public Maze generate(int rows, int columns) {
-            if (rows < 2)
-                rows = 10;
-            if (columns < 2)
-                columns = 10;
-            myMaze = new Maze(rows, columns);
-            cells = new Position[rows][columns];
-            for (int i = 0; i < rows; i++)
-                for (int j = 0; j < columns; j++)
-                    cells[i][j] = new Position(i, j); // double array with new position in each cell
-            //change all values to 1
-            for (int i = 0; i < myMaze.numOfRows(); i++)
-                for (int j = 0; j < myMaze.numOfColumns(); j++)
-                    myMaze.changeCellValue(i, j, Integer.toString(1));
-            candidates.add(myMaze.getStartPosition()); //add start position to array
-            Position currentPosition;
-            while (candidates.size() > 0) { //while array not empty
-                currentPosition = getRandomPos();//from candidates list
-                if (isChangeAble(currentPosition)) {
-                    addToPath(currentPosition);//change value to 0
-                    addCandidates(currentPosition);//neighbours are candidates
-                }
-                candidates.remove(currentPosition);
-            }
-            makeGoalPosition();
-            return myMaze;
-        }
-
-        /**
-         * returns array list of 2-4 neighbours of a position
-         *
-         * @param p - position from user
-         */
-
-        private List<Position> myNeighbours(Position p) {
-            if (p == null)
-                return null;
-            List<Position> neighbours;
-            neighbours = new ArrayList<Position>();
-            //check if can go up down left or right if so, add to list
-            if (isLegal(p.getRowIndex() - 1, p.getColumnIndex()))
-                neighbours.add(cells[p.getRowIndex() - 1][p.getColumnIndex()]);
-            if (isLegal(p.getRowIndex() + 1, p.getColumnIndex()))
-                neighbours.add(cells[p.getRowIndex() + 1][p.getColumnIndex()]);
-            if (isLegal(p.getRowIndex(), p.getColumnIndex() - 1))
-                neighbours.add(cells[p.getRowIndex()][p.getColumnIndex() - 1]);
-            if (isLegal(p.getRowIndex(), p.getColumnIndex() + 1))
-                neighbours.add(cells[p.getRowIndex()][p.getColumnIndex() + 1]);
-            return neighbours; //return list
-        }
-
-        /**
-         * add to candidates<position> list all position's neighbours who might become a path.
-         *
-         * @param p - position from user
-         */
-
-        private void addCandidates(Position p) {
-            if (p != null) {
-                List<Position> neighbours;
-                neighbours = myNeighbours(p);
-                for (int i = 0; i < neighbours.size(); i++)
-                    if (myMaze.getCellValue(neighbours.get(i).getRowIndex(), neighbours.get(i).getColumnIndex()) == 1 && isChangeAble(neighbours.get(i)))
-                        candidates.add(neighbours.get(i)); //only legal neighbours and that have 1
-            }
-        }
-
-        /**
-         * changeable cell (from 1 to 0) is a cell that has maximum of one 0 neighbour,
-         *
-         * @param p - position from user
-         */
-
-        private void addToPath(Position p) {
-            if (p != null && isChangeAble(p))
-                myMaze.changeCellValue(p.getRowIndex(), p.getColumnIndex(), Integer.toString(0));
-        }
-
-        /**
-         * checks if currently position can be changed to 0, if so, then do it
-         *
-         * @param p - position from user
-         */
-
-        private boolean isChangeAble(Position p) {
-            if (p == null)
-                return false;
-            if (myMaze.getCellValue(p.getRowIndex(), p.getColumnIndex()) == 0)
-                return false;
-            return (numOfPathNeighbours(p) <= 1);
-        }
-
-        /**
-         * returns number of neighbours which are already on the path
-         *
-         * @param p - position from user
-         */
-
-        private int numOfPathNeighbours(Position p) {
-            if (p == null)
-                return 0;
-            int count = 0;
-            //if neighbour legal and has 0 count++;
-            if (isLegal(p.getRowIndex(), p.getColumnIndex() + 1) &&
-                    myMaze.getCellValue(p.getRowIndex(), p.getColumnIndex() + 1) == 0)
-                count++;
-            if (isLegal(p.getRowIndex(), p.getColumnIndex() - 1) &&
-                    myMaze.getCellValue(p.getRowIndex(), p.getColumnIndex() - 1) == 0)
-                count++;
-            if (isLegal(p.getRowIndex() + 1, p.getColumnIndex()) &&
-                    myMaze.getCellValue(p.getRowIndex() + 1, p.getColumnIndex()) == 0)
-                count++;
-            if (isLegal(p.getRowIndex() - 1, p.getColumnIndex()) &&
-                    myMaze.getCellValue(p.getRowIndex() - 1, p.getColumnIndex()) == 0)
-                count++;
-            return count;
-        }
-
-        /**
-         * checks if the position is on maze's bounds
-         *
-         * @param column - column of maze
-         * @param row    - row of maze
-         */
-
-        private boolean isLegal(int row, int column) {
-            if (row < 0 || row >= myMaze.numOfRows()) // check if out of bound
-                return false;
-            return column >= 0 && column < myMaze.numOfColumns();
-        }
-
-
-        /**
-         * returns a random position from candidates list.
-         *
-         * @return - random position
-         */
-        private Position getRandomPos() {
-            Random random = new Random();
-            int index = random.nextInt(candidates.size()); // get a random candidate.
-            return candidates.get(index);
-        }
-
-        /**
-         * set a random goal position
-         */
-
-        private void makeGoalPosition() {
-            int x;
-            boolean found = false;
-            int rows = myMaze.numOfRows();
-            int columns = myMaze.numOfColumns();
-            Random random = new Random();
-            while (!found) {
-                x = random.nextInt(2) + 1;//get value of 1 or 2
-                if (x == 1) {
-                    x = random.nextInt(columns); // get a random column
-                    if (myMaze.getCellValue(rows - 1, x) == 0) {//legal goal position in last row.
-                        myMaze.setGoalPosition(new Position(rows - 1, x));
-                        found = true;
-                    }
-                } else {
-                    x = random.nextInt(myMaze.numOfRows());// get a random row
-                    if (myMaze.getCellValue(x, columns - 1) == 0) {//legal goal position in last column
-                        myMaze.setGoalPosition(new Position(x, columns - 1));
-                        found = true;
-                    }
-                }
-            }
-        }
+        System.out.println(" ");
     }
 }
