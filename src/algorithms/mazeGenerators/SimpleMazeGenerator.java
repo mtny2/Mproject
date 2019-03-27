@@ -8,7 +8,6 @@ public class SimpleMazeGenerator extends AMazeGenerator {
     * generate a maze and randomly fill with 0's and 1's
     * creates a maze and makes sure it has a solution
     */
-
    public Maze generate(int rows, int columns) {
        MyMaze = new Maze(rows, columns);
        String MazeValue;
@@ -24,12 +23,8 @@ public class SimpleMazeGenerator extends AMazeGenerator {
        }
        //set a random start point
        int MazeStartPoint = (int) (Math.random() * rows);
-  //     int MazeStartPoint2 = (int) (Math.random() * columns);
        Position start = new Position(MazeStartPoint, 0);
        MyMaze.setStartPosition(start);
-       //end position is at corner on right bottom
-     //  int MazeEndPoint1=(int)(Math.random()*rows);
-      // int MazeEndPoint2=(int)(Math.random()*columns);
        Position end = new Position(rows-1, columns-1);
        MyMaze.setGoalPosition(end);
        int i = MazeStartPoint, j = 0;
