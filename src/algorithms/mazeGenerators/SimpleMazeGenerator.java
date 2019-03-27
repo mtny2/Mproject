@@ -10,10 +10,6 @@ public class SimpleMazeGenerator extends AMazeGenerator {
     */
 
    public Maze generate(int rows, int columns) {
-     //  if (rows < 2) //if rows <2 then create default size of 10
-     //      rows = 10;
-     //  if (columns < 2) //if columns <2 then create default size of 10
-     //      columns = 10;
        MyMaze = new Maze(rows, columns);
        String MazeValue;
        for (int i = 0; i < rows; i++) {
