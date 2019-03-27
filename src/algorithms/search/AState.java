@@ -26,6 +26,7 @@ public abstract class AState {
      */
 
     public double getCost() {
+
         return this.cost;
     }
 
