@@ -6,28 +6,23 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
     String name;
     int numberOfNodes = 0;
 
-    /**
-     * @return name - get name of algorithm
-     */
-
     public String getName()
     {
         return name;
     }
 
     /**
-     * @return numberOfNodes get number of nodes we went threw to solve problem
+     * get number of nodes we went threw to solve problem
      */
-
     public int getNumberOfNodesEvaluated()
     {
+
         return numberOfNodes;
     }
 
     /**
-     * @return final solution
+     * final solution
      */
-
     public Solution finalSolution(AState state) {
         Solution Sol = new Solution();
         Stack<AState> FSol = new Stack<AState>();

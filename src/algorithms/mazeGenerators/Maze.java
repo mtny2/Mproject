@@ -1,6 +1,6 @@
 package algorithms.mazeGenerators;
 
-public class Maze   {
+public class Maze {
 
     private String[][] myMaze;
     private Position startPosition;
@@ -8,13 +8,8 @@ public class Maze   {
 
 
     public Maze(int row, int column) {
-      // if (row < 2)
-      //     row = 10;
-      // if (column < 2)
-      //     column = 10;
         myMaze = new String[row][column];
         startPosition = new Position(0, 0); //default start = (0,0)
-
     }
 
     public Position getStartPosition() {
@@ -22,14 +17,14 @@ public class Maze   {
         return startPosition;
     }
 
-    public Position getGoalPosition() {
-        return goalPosition;
-    }
-
     public void setStartPosition(Position startPosition) {
         if (startPosition.getRowIndex() < this.numOfRows() && startPosition.getColumnIndex() < this.numOfColumns())
             if (startPosition.getColumnIndex() >= 0 && startPosition.getRowIndex() >= 0)
                 this.startPosition = startPosition;
+    }
+
+    public Position getGoalPosition() {
+        return goalPosition;
     }
 
     public void setGoalPosition(Position goalPosition) {
@@ -40,22 +35,24 @@ public class Maze   {
 
 
     public int numOfRows() {
+
         return myMaze.length;
     }
 
     public int numOfColumns() {
+
         return myMaze[0].length;
     }
 
     public void changeCellValue(int row, int column, String value) {
-        if (value=="0" || value=="1" || value=="2" || value==" ")
+        if (value == "0" || value == "1")
             if (row < numOfRows() && column < numOfColumns() && row >= 0 && column >= 0)
                 myMaze[row][column] = value;
     }
 
 
-
     public String getCellValue(int row, int column) {
+
         return myMaze[row][column];
     }
 

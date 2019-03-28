@@ -32,18 +32,18 @@ public class SimpleMazeGenerator extends AMazeGenerator {
        //make sure maze has a solution
        while (!(i == rows - 1 && j == columns - 1)) {
            if (i == rows - 1) {
-               MyMaze.changeCellValue(i, j + 1, "2");
+               MyMaze.changeCellValue(i, j + 1, "0");
                j++;
            } else if (j == columns - 1) {
-               MyMaze.changeCellValue(i + 1, j, "2");
+               MyMaze.changeCellValue(i + 1, j, "0");
                i++;
            } else {
                Direction = (Math.random() < 0.5) ? 0 : 1;
                if (Direction == 1) {
-                   MyMaze.changeCellValue(i + 1, j, "2");
+                   MyMaze.changeCellValue(i + 1, j, "0");
                    i++;
                } else {
-                   MyMaze.changeCellValue(i, j + 1, "2");
+                   MyMaze.changeCellValue(i, j + 1, "0");
                    j++;
                }
            }

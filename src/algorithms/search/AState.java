@@ -10,10 +10,6 @@ public abstract class AState {
     private int id;
     private double cost;
 
-    /**
-     * constructor
-     */
-
     AState() {
         this.id = counter;
         counter++;
@@ -21,30 +17,20 @@ public abstract class AState {
         this.cost = 0;
     }
 
-    /**
-     * @return cost of aState
-     */
-
     public double getCost() {
 
         return this.cost;
     }
 
-    /**
-     * @param costI set cost
-     */
-
     public void setCost(double costI) {
+
         this.cost = costI;
     }
-
-    /**
-     * to string - abstract
-     */
 
     public abstract String toString();
 
     public int hashCode() {
+
         return id;
     }
 }

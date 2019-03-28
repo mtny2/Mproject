@@ -26,6 +26,7 @@ public class RunSearchOnMaze {
         System.out.println("Solution path:");
         ArrayList<AState> solutionPath = solution.getSolutionPath();
         for (int i = 0; i < solutionPath.size(); i++) {
+
             System.out.println(String.format("%s.%s",i,solutionPath.get(i)));
         }
     }

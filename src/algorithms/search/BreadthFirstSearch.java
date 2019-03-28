@@ -48,7 +48,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                 domain.ResetVisit(); //reset visited fields
                 return Sol; //return solution
             }
-            MyNeighbours = domain.getAllPossibleStates(temp);
+            MyNeighbours = domain.getAllSuccessors(temp);
             for (int i = 0; i < MyNeighbours.size(); i++) {
                 if (!domain.isVisited(MyNeighbours.get(i))) {// new state found
                     numberOfNodes++;

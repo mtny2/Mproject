@@ -60,7 +60,7 @@ public class BestFirstSearch extends ASearchingAlgorithm {
                 domain.ResetVisit(); //reset visited fields
                 return Solu; //return solution
             }
-            MyNeighbours = domain.getAllPossibleStates(temp);
+            MyNeighbours = domain.getAllSuccessors(temp);
             for (int i = 0; i < MyNeighbours.size(); i++) {
                 if (!domain.isVisited(MyNeighbours.get(i))) {// new state found
                     MyNeighbours.get(i).cameFrom = temp; //updates its parent
