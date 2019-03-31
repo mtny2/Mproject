@@ -48,16 +48,15 @@ public class MyMazeGenerator extends AMazeGenerator {
 
 
     /**
-     * returns array list of 2-4 neighbours of a position
+     * returns array list of neighbours of a position
      *
-     * @param position - position from user
      */
 
     private List<Position> myNeighbours(Position position) {
         if (position == null)
             return null;
         List<Position> neighbours;
-        neighbours = new ArrayList<Position>();
+        neighbours = new ArrayList<>();
         //check if can go up down left or right if so, add to list
         //Down
         if (isValid(position.getRowIndex() - 1, position.getColumnIndex()))
@@ -75,9 +74,8 @@ public class MyMazeGenerator extends AMazeGenerator {
     }
 
     /**
-     * add to candidates<position> list all position's neighbours who might become a path.
+     * add to candidates position's neighbours who might become a path
      *
-
      */
 
     private void addCandidatesToSet(Position position) {
@@ -99,7 +97,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         if (position == null)
             return 0;
         int count = 0;
-        //if neighbour legal and has 0 count++;
+        //if neighbour legal
         //Down
         if (isValid(position.getRowIndex() - 1, position.getColumnIndex()) &&
                 myMaze.getCellValue(position.getRowIndex() - 1, position.getColumnIndex()) == "0")
