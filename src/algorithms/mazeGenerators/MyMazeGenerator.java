@@ -3,7 +3,12 @@ package algorithms.mazeGenerators;
 import java.util.*;
 
 /**
- * Class that generate a maze by using RandomizedPrims algorithm
+ * Class that generate a maze by using Randomized Prims algorithm
+ * Extends AMazeGenerator
+ *
+ * @param Maze         myMaze - maze that we build
+ * @param List         set -  of neighbour`s Position
+ * @param Position[][]
  */
 public class MyMazeGenerator extends AMazeGenerator {
 
@@ -14,10 +19,6 @@ public class MyMazeGenerator extends AMazeGenerator {
     public MyMazeGenerator() {
         set = new ArrayList<Position>();
     }
-
-    /**
-     * generate a maze with all 1's
-     */
 
     public Maze generate(int rows, int columns) {
         myMaze = new Maze(rows, columns);
@@ -34,7 +35,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         Random random = new Random();
         int index = 0;
         while (set.size() > 0) {
-            index=random.nextInt(set.size());
+            index = random.nextInt(set.size());
             currentPosition = set.get(index);//from candidates list
             if (currentPosition != null && numOfPathNeighbours(currentPosition) <= 1) {//checks if currently position can be changed to 0 and has maximum of one 0 neighbour
                 myMaze.changeCellValue(currentPosition.getRowIndex(), currentPosition.getColumnIndex(), "0");
@@ -42,16 +43,14 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
             set.remove(currentPosition);
         }
-        goalPosition();
+        setRandomgoalPosition();
         return myMaze;
     }
 
-
     /**
+     * My neighbours List
      * returns array list of neighbours of a position
-     *
      */
-
     private List<Position> myNeighbours(Position position) {
         if (position == null)
             return null;
@@ -74,10 +73,8 @@ public class MyMazeGenerator extends AMazeGenerator {
     }
 
     /**
-     * add to candidates position's neighbours who might become a path
-     *
+     * Add to candidates position's neighbours who might become a path
      */
-
     private void addCandidatesToSet(Position position) {
         if (position != null) {
             List<Position> neighbours;
@@ -89,10 +86,33 @@ public class MyMazeGenerator extends AMazeGenerator {
     }
 
     /**
-     * returns number of neighbours which are already on the path
-     *
+     * set a random goal position in the last raw or last columns
      */
+    private void setRandomgoalPosition() {
+        int random;
+        boolean found = false;
+        while (!found) {
+            random = (Math.random() < 0.5) ? 0 : 1;
+            if (random == 1) {
+                random = (int) (Math.random() * myMaze.numOfColumns());
+                if (myMaze.getCellValue(myMaze.numOfRows() - 1, random) == "0") {
+                    myMaze.setGoalPosition(new Position(myMaze.numOfRows() - 1, random));
+                    found = true;
+                }
+            } else {
+                random = (int) (Math.random() * myMaze.numOfRows());
+                if (myMaze.getCellValue(random, myMaze.numOfColumns() - 1) == "0") {
+                    myMaze.setGoalPosition(new Position(random, myMaze.numOfColumns() - 1));
+                    found = true;
+                }
+            }
+        }
+    }
 
+    /**
+     * Returns count of  neighbours which are already on the path
+     * @param count
+     */
     private int numOfPathNeighbours(Position position) {
         if (position == null)
             return 0;
@@ -115,13 +135,11 @@ public class MyMazeGenerator extends AMazeGenerator {
         if (isValid(position.getRowIndex(), position.getColumnIndex() - 1) &&
                 myMaze.getCellValue(position.getRowIndex(), position.getColumnIndex() - 1) == "0")
             count++;
-
         return count;
     }
 
     /**
-     * checks if the position is on maze's bounds
-     *
+     * Checks if the position is on maze's bounds
      */
 
     private boolean isValid(int row, int column) {
@@ -130,28 +148,4 @@ public class MyMazeGenerator extends AMazeGenerator {
         return column >= 0 && column < myMaze.numOfColumns();
     }
 
-
-    /**
-     * set a random goal position in the last raw or last columns
-     */
-    private void goalPosition() {
-        int x;
-        boolean found = false;
-        while (!found) {
-            x = (Math.random() < 0.5) ? 0 : 1;
-            if (x == 1) {
-                x = (int) (Math.random() * myMaze.numOfColumns());
-                if (myMaze.getCellValue(myMaze.numOfRows() - 1, x) == "0") {
-                    myMaze.setGoalPosition(new Position(myMaze.numOfRows() - 1, x));
-                    found = true;
-                }
-            } else {
-                x = (int) (Math.random() * myMaze.numOfRows());
-                if (myMaze.getCellValue(x, myMaze.numOfColumns() - 1) == "0") {
-                    myMaze.setGoalPosition(new Position(x, myMaze.numOfColumns() - 1));
-                    found = true;
-                }
-            }
-        }
-    }
 }

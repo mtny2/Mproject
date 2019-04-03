@@ -1,5 +1,11 @@
 package algorithms.mazeGenerators;
 
+
+/**
+ * Generate a zero maze(empty maze)
+ * return maze (MyMaze)
+ */
+
 public class EmptyMazeGenerator extends AMazeGenerator {
 
     private Maze MyMaze;
@@ -13,9 +19,8 @@ public class EmptyMazeGenerator extends AMazeGenerator {
         }
         Position start = new Position(0, 0);
         MyMaze.setStartPosition(start);
-        Position end = new Position(rows-1, columns-1);
+        Position end = new Position(rows - 1, columns - 1);
         MyMaze.setGoalPosition(end);
         return MyMaze;
-
     }
 }

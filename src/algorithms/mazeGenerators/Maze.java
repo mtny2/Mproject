@@ -1,19 +1,27 @@
 package algorithms.mazeGenerators;
 
+/**
+ * Maze Class actualize
+ *
+ * @param string[][] - myMaze : A maze is represented by a two-dimensional array
+ * @param Position   - startPosition : A start position of the maze
+ * @param Position   - goalPosition : A last position of the maze (the end).
+ * Print method, changeCellValue method and set/get methods
+ *
+ */
 public class Maze {
 
     private String[][] myMaze;
     private Position startPosition;
     private Position goalPosition;
 
-
+    //Constructor
     public Maze(int row, int column) {
         myMaze = new String[row][column];
         startPosition = new Position(0, 0); //default start = (0,0)
     }
 
     public Position getStartPosition() {
-
         return startPosition;
     }
 
@@ -22,7 +30,6 @@ public class Maze {
             if (startPosition.getColumnIndex() >= 0 && startPosition.getRowIndex() >= 0)
                 this.startPosition = startPosition;
     }
-
     public Position getGoalPosition() {
         return goalPosition;
     }
@@ -33,14 +40,11 @@ public class Maze {
                 this.goalPosition = goalPosition;
     }
 
-
     public int numOfRows() {
-
         return myMaze.length;
     }
 
     public int numOfColumns() {
-
         return myMaze[0].length;
     }
 
@@ -52,11 +56,10 @@ public class Maze {
 
 
     public String getCellValue(int row, int column) {
-
         return myMaze[row][column];
     }
 
-
+// Print method
     public void print() {
         for (int i = 0; i < myMaze.length; i++) {
             System.out.println(" "); //go down at end of line of array
