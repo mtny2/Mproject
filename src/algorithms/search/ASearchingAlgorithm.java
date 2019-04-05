@@ -2,6 +2,11 @@ package algorithms.search;
 
 import java.util.Stack;
 
+/**
+ * ASearchingAlgorithm implements ISearchingAlgorithm
+ * containing 3 method getName,getNumberOfNodesEvaluated,finalSolution
+ * finalSolution - return the path to solution from start position to goal position
+ */
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
     String name;
     int numberOfNodes = 0;

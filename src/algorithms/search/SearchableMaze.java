@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Class to get info of maze
+ *
  */
 
 public class SearchableMaze implements ISearchable {
@@ -41,13 +42,6 @@ public class SearchableMaze implements ISearchable {
             goal = (MazeState) x;
     }
 
-    private boolean inBounds(int row, int column) {
-        if (row < 0 || column < 0 || row >= maze.numOfRows() || column >= maze.numOfColumns())
-            return false;
-        if (visitedCell[row][column] == false)
-            return true;
-        return false;
-    }
 
     /**
      * get all diagonals cells that are legal to move
@@ -159,4 +153,13 @@ public class SearchableMaze implements ISearchable {
             for (int j = 0; j < maze.numOfColumns(); j++)
                 visitedCell[i][j] = false;
     }
+
+    private boolean inBounds(int row, int column) {
+        if (row < 0 || column < 0 || row >= maze.numOfRows() || column >= maze.numOfColumns())
+            return false;
+        if (visitedCell[row][column] == false)
+            return true;
+        return false;
+    }
+
 }

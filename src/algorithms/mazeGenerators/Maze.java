@@ -1,13 +1,24 @@
 package algorithms.mazeGenerators;
 
 public class Maze {
-
+    /**
+     * Maze Class actualize
+     *
+     * @param string[][] - myMaze : A maze is represented by a two-dimensional array
+     * @param Position   - startPosition : A start position of the maze
+     * @param Position   - goalPosition : A last position of the maze (the end)
+     *
+     */
     private String[][] myMaze;
     private Position startPosition;
     private Position goalPosition;
 
 
     public Maze(int row, int column) {
+        if (row < 2)
+            row = 10;
+        if (column < 2)
+            column = 10;
         myMaze = new String[row][column];
         startPosition = new Position(0, 0); //default start = (0,0)
     }

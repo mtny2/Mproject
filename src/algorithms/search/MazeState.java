@@ -1,5 +1,10 @@
 package algorithms.search;
 
+/**
+ * MazeState extends AState
+ * Object the contains row and column
+ * equals function - equable function to compare between mazeState's
+ */
 public class MazeState extends AState {
 
     private int row;
@@ -38,7 +43,7 @@ public class MazeState extends AState {
         return ((MazeState) o).row == row && ((MazeState) o).col == col;
     }
 
-   //public int hashCode() {
-   //     return 3 * (row * 5 + col * 3) + row;
-   //}
+   public int hashCode() {
+        return 3 * (row * 5 + col * 3) + row;
+   }
 }

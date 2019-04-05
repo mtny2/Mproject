@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * interface to control different kind of problems
+ *
  */
 public interface ISearchable {
     AState getStartState();

@@ -3,10 +3,10 @@ package algorithms.mazeGenerators;
 public class SimpleMazeGenerator extends AMazeGenerator {
 
     private Maze MyMaze;
-
    /**
     * generate a maze and randomly fill with 0's and 1's
     * creates a maze and makes sure it has a solution
+    *
     */
    public Maze generate(int rows, int columns) {
        MyMaze = new Maze(rows, columns);

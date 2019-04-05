@@ -1,7 +1,10 @@
 package algorithms.mazeGenerators;
 
 public class EmptyMazeGenerator extends AMazeGenerator {
-
+    /**
+     * Generate a zero maze(empty maze)
+     *
+     */
     private Maze MyMaze;
 
     public Maze generate(int rows, int columns) {

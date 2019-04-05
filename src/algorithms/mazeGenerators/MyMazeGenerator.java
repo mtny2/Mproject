@@ -3,7 +3,7 @@ package algorithms.mazeGenerators;
 import java.util.*;
 
 /**
- * Class that generate a maze by using RandomizedPrims algorithm
+ * Class that generate a maze by using Randomized Prims algorithm
  */
 public class MyMazeGenerator extends AMazeGenerator {
 
@@ -12,7 +12,7 @@ public class MyMazeGenerator extends AMazeGenerator {
     private List<Position> set;
 
     public MyMazeGenerator() {
-        set = new ArrayList<Position>();
+        set = new ArrayList<>();
     }
 
     /**
@@ -20,6 +20,10 @@ public class MyMazeGenerator extends AMazeGenerator {
      */
 
     public Maze generate(int rows, int columns) {
+        if (rows < 2)
+            rows = 10;
+        if (columns < 2)
+            columns = 10;
         myMaze = new Maze(rows, columns);
         positionCells = new Position[rows][columns];
         for (int i = 0; i < rows; i++)
@@ -32,7 +36,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         set.add(myMaze.getStartPosition()); //add start position to array
         Position currentPosition;
         Random random = new Random();
-        int index = 0;
+        int index;
         while (set.size() > 0) {
             index=random.nextInt(set.size());
             currentPosition = set.get(index);//from candidates list
@@ -42,7 +46,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
             set.remove(currentPosition);
         }
-        goalPosition();
+        setRandomGoalPosition();
         return myMaze;
     }
 
@@ -134,7 +138,7 @@ public class MyMazeGenerator extends AMazeGenerator {
     /**
      * set a random goal position in the last raw or last columns
      */
-    private void goalPosition() {
+    private void setRandomGoalPosition() {
         int x;
         boolean found = false;
         while (!found) {

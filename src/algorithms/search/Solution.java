@@ -12,7 +12,7 @@ public class Solution {
 
 
     public Solution() {
-        solution = new ArrayList<AState>();
+        solution = new ArrayList<>();
     }
 
 

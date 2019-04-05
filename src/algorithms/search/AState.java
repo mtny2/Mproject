@@ -29,7 +29,7 @@ public abstract class AState {
 
     public abstract String toString();
 
-   //public int hashCode() {
-   //    return id;
-   //}
+   public int hashCode() {
+       return id;
+   }
 }

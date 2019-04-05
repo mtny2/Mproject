@@ -5,6 +5,7 @@ package algorithms.search;
  */
 
 public interface ISearchingAlgorithm {
+
     Solution finalSolution(AState state);
 
     Solution solve(ISearchable domain);

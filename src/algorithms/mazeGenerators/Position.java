@@ -1,5 +1,8 @@
 package algorithms.mazeGenerators;
-
+/**
+ * Position Class, my location
+ *
+ */
 public class Position {
 
     private int row;
@@ -16,16 +19,19 @@ public class Position {
     }
 
     public int getRowIndex() {
+
         return row;
     }
 
 
-    public int getColumnIndex() {
+    public int getColumnIndex()
+    {
         return column;
     }
 
 
     public String toString() {
+
         return "{" + row + "," + column + "}";
     }
 }

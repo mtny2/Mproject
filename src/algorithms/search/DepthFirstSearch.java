@@ -2,11 +2,13 @@ package algorithms.search;
 
 import java.util.ArrayList;
 import java.util.Stack;
-
+/**
+ * Solve with Depth First Search Algorithm
+ * Extends ASearchingAlgorithm and use Stack as LinkedList
+ * Solve method - return solution object
+ *
+ */
 public class DepthFirstSearch extends ASearchingAlgorithm {
-    /**
-     * Solve with Depth First Search Algorithm
-     */
 
     public DepthFirstSearch() {
         super(); 
@@ -26,6 +28,11 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         numberOfNodes++;
         while (pathSteps.size() != 0) {
             AState temp = pathSteps.pop();
+            if (temp.equals(domain.getGoalState())) {
+                domain.setGoalState(temp);
+                solution = finalSolution(temp);
+                return solution;
+            }
             MyNeighbours = domain.getAllPossibleStates(temp);
             for (int i = 0; i < MyNeighbours.size(); i++) {
                 if (!domain.isVisited(MyNeighbours.get(i))) {
