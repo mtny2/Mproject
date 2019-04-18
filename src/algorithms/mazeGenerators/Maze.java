@@ -9,7 +9,7 @@ public class Maze {
      * @param Position   - goalPosition : A last position of the maze (the end)
      *
      */
-    private String[][] myMaze;
+    private int[][] myMaze;
     private Position startPosition;
     private Position goalPosition;
 
@@ -19,12 +19,14 @@ public class Maze {
             row = 10;
         if (column < 2)
             column = 10;
-        myMaze = new String[row][column];
-        startPosition = new Position(0, 0); //default start = (0,0)
+        myMaze = new int[row][column];
+        startPosition = new Position(0,0); //default start = (0,0)
     }
 
-    public Position getStartPosition() {
 
+
+    public Position getStartPosition()
+    {
         return startPosition;
     }
 
@@ -55,14 +57,14 @@ public class Maze {
         return myMaze[0].length;
     }
 
-    public void changeCellValue(int row, int column, String value) {
-        if (value == "0" || value == "1")
+    public void changeCellValue(int row, int column, int value) {
+        if (value == 0 || value == 1)
             if (row < numOfRows() && column < numOfColumns() && row >= 0 && column >= 0)
                 myMaze[row][column] = value;
     }
 
 
-    public String getCellValue(int row, int column) {
+    public int getCellValue(int row, int column) {
 
         return myMaze[row][column];
     }
@@ -81,4 +83,54 @@ public class Maze {
         }
         System.out.println(" ");
     }
+
+
+
+
+
+    //public List<Integer> OneZeroList(){
+    // List<Integer> tmp=new ArrayList<>();
+    // int counter=0;
+    // boolean one=true;
+    // boolean zero=true;
+    // for(int i=0;i<numOfRows();i++)
+    // {
+    //     for(int j=0;j<numOfRows();j++){
+
+    //         if(myMaze[i][j]=="0" && one==true && i != startPosition.getRowIndex() && j != startPosition.getColumnIndex()){
+    //             tmp.add(counter);
+    //             counter=0;
+    //             one=false;
+    //             zero=true;
+
+    //         }
+    //         if(myMaze[i][j]=="0" && zero==true &&i != startPosition.getRowIndex() && j != startPosition.getColumnIndex()){
+    //             counter++;
+    //         }
+
+    //         if(myMaze[i][j]=="1" && zero==true &&i != startPosition.getRowIndex() && j != startPosition.getColumnIndex()){
+    //             tmp.add(counter);
+    //             counter=0;
+    //             one=true;
+    //             zero=false;
+    //         }
+    //         if(myMaze[i][j]=="1" && one==true && i!= startPosition.getRowIndex()  j!= startPosition.getColumnIndex()){
+    //             counter++;
+    //         }
+
+    //     }
+    // }
+    // return tmp;
+    // }
+
+    /*
+     * to string function
+     */
+    public String toString() {
+        String x;
+        x = startPosition.getColumnIndex() + " " + startPosition.getRowIndex() + " " + goalPosition.getRowIndex() + " " + goalPosition.getColumnIndex() + " " + myMaze.length + " " + myMaze[0].length;
+        return x;
+    }
+
+
 }
