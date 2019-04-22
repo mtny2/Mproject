@@ -11,7 +11,7 @@ public class EmptyMazeGenerator extends AMazeGenerator {
         MyMaze = new Maze(rows, columns);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                MyMaze.changeCellValue(i, j, "0");
+                MyMaze.changeCellValue(i, j, 0);
             }
         }
         Position start = new Position(0, 0);

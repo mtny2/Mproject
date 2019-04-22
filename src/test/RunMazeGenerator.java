@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class RunMazeGenerator {
     public static void main(String[] args) {
-        testMazeGenerator(new SimpleMazeGenerator());
+      //  testMazeGenerator(new SimpleMazeGenerator());
         testMazeGenerator(new MyMazeGenerator());
     }
 
@@ -17,13 +17,14 @@ public class RunMazeGenerator {
         // prints the time it takes the algorithm to run
      //   System.out.println(String.format("Maze generation time(ms): %s", mazeGenerator.measureAlgorithmTimeMillis(100/*rows*/,100/*columns*/)));
         // generate another maze
-        Maze maze = mazeGenerator.generate(5/*rows*/, 5/*columns*/);
+        Maze maze = mazeGenerator.generate(10/*rows*/, 10/*columns*/);
         maze.print();
 
        // List<Integer> temp = maze.OneZeroList();
-
+        byte[] b=maze.toByteArray();
         // prints the maze
-
+        Maze m=new Maze(b);
+        m.print();
         // get the maze entrance
         Position startPosition = maze.getStartPosition();
 

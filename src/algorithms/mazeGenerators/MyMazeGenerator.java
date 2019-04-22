@@ -32,7 +32,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         //change all values to 1
         for (int i = 0; i < myMaze.numOfRows(); i++)
             for (int j = 0; j < myMaze.numOfColumns(); j++)
-                myMaze.changeCellValue(i, j, "1");
+                myMaze.changeCellValue(i, j, 1);
         set.add(myMaze.getStartPosition()); //add start position to array
         Position currentPosition;
         Random random = new Random();
@@ -41,7 +41,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             index=random.nextInt(set.size());
             currentPosition = set.get(index);//from candidates list
             if (currentPosition != null && numOfPathNeighbours(currentPosition) <= 1) {//checks if currently position can be changed to 0 and has maximum of one 0 neighbour
-                myMaze.changeCellValue(currentPosition.getRowIndex(), currentPosition.getColumnIndex(), "0");
+                myMaze.changeCellValue(currentPosition.getRowIndex(), currentPosition.getColumnIndex(), 0);
                 addCandidatesToSet(currentPosition);//neighbours are set
             }
             set.remove(currentPosition);
@@ -87,7 +87,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             List<Position> neighbours;
             neighbours = myNeighbours(position);
             for (int i = 0; i < neighbours.size(); i++)//check if the add cell has maximum of one 0 neighbour
-                if (myMaze.getCellValue(neighbours.get(i).getRowIndex(), neighbours.get(i).getColumnIndex()) == "1" && numOfPathNeighbours(neighbours.get(i)) <= 1)
+                if (myMaze.getCellValue(neighbours.get(i).getRowIndex(), neighbours.get(i).getColumnIndex()) == 1 && numOfPathNeighbours(neighbours.get(i)) <= 1)
                     set.add(neighbours.get(i)); //only legal neighbours and that have 1
         }
     }
@@ -104,20 +104,20 @@ public class MyMazeGenerator extends AMazeGenerator {
         //if neighbour legal
         //Down
         if (isValid(position.getRowIndex() - 1, position.getColumnIndex()) &&
-                myMaze.getCellValue(position.getRowIndex() - 1, position.getColumnIndex()) == "0")
+                myMaze.getCellValue(position.getRowIndex() - 1, position.getColumnIndex()) == 0)
             count++;
         //Up
         if (isValid(position.getRowIndex() + 1, position.getColumnIndex()) &&
-                myMaze.getCellValue(position.getRowIndex() + 1, position.getColumnIndex()) == "0")
+                myMaze.getCellValue(position.getRowIndex() + 1, position.getColumnIndex()) == 0)
             count++;
 
         //Right
         if (isValid(position.getRowIndex(), position.getColumnIndex() + 1) &&
-                myMaze.getCellValue(position.getRowIndex(), position.getColumnIndex() + 1) == "0")
+                myMaze.getCellValue(position.getRowIndex(), position.getColumnIndex() + 1) == 0)
             count++;
         //Left
         if (isValid(position.getRowIndex(), position.getColumnIndex() - 1) &&
-                myMaze.getCellValue(position.getRowIndex(), position.getColumnIndex() - 1) == "0")
+                myMaze.getCellValue(position.getRowIndex(), position.getColumnIndex() - 1) == 0)
             count++;
 
         return count;
@@ -145,13 +145,13 @@ public class MyMazeGenerator extends AMazeGenerator {
             x = (Math.random() < 0.5) ? 0 : 1;
             if (x == 1) {
                 x = (int) (Math.random() * myMaze.numOfColumns());
-                if (myMaze.getCellValue(myMaze.numOfRows() - 1, x) == "0") {
+                if (myMaze.getCellValue(myMaze.numOfRows() - 1, x) == 0) {
                     myMaze.setGoalPosition(new Position(myMaze.numOfRows() - 1, x));
                     found = true;
                 }
             } else {
                 x = (int) (Math.random() * myMaze.numOfRows());
-                if (myMaze.getCellValue(x, myMaze.numOfColumns() - 1) == "0") {
+                if (myMaze.getCellValue(x, myMaze.numOfColumns() - 1) == 0) {
                     myMaze.setGoalPosition(new Position(x, myMaze.numOfColumns() - 1));
                     found = true;
                 }

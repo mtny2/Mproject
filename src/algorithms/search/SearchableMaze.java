@@ -49,29 +49,29 @@ public class SearchableMaze implements ISearchable {
     private ArrayList<AState> getAllDiagonals(int x, int y) {
         ArrayList<AState> temp = new ArrayList<>();
         MazeState tempM;
-        if (inBounds(x - 1, y - 1) && visitedCell[x - 1][y - 1] == false && maze.getCellValue(x - 1, y - 1) == "0")
+        if (inBounds(x - 1, y - 1) && visitedCell[x - 1][y - 1] == false && maze.getCellValue(x - 1, y - 1) == 0)
             if (visitedCell[x - 1][y] == false || visitedCell[x][y - 1] == false)
-                if (maze.getCellValue(x - 1, y) == "0" || maze.getCellValue(x, y - 1) == "0") {
+                if (maze.getCellValue(x - 1, y) == 0 || maze.getCellValue(x, y - 1) == 0) {
                     tempM = new MazeState(x - 1, y - 1);
                     tempM.setCost(1.5);
                     temp.add(tempM);
                 }
-        if (inBounds(x + 1, y + 1) && visitedCell[x + 1][y + 1] == false && maze.getCellValue(x + 1, y + 1) == "0")
+        if (inBounds(x + 1, y + 1) && visitedCell[x + 1][y + 1] == false && maze.getCellValue(x + 1, y + 1) == 0)
             if (visitedCell[x + 1][y] == false || visitedCell[x][y + 1] == false)
-                if (maze.getCellValue(x, y + 1) == "0" || maze.getCellValue(x + 1, y) == "0") {
+                if (maze.getCellValue(x, y + 1) == 0 || maze.getCellValue(x + 1, y) == 0) {
                     tempM = new MazeState(x + 1, y + 1);
                     tempM.setCost(1.5);
                     temp.add(tempM);
                 }
-        if (inBounds(x + 1, y - 1) && visitedCell[x + 1][y - 1] == false && maze.getCellValue(x + 1, y - 1) == "0")
+        if (inBounds(x + 1, y - 1) && visitedCell[x + 1][y - 1] == false && maze.getCellValue(x + 1, y - 1) == 0)
             if (visitedCell[x][y - 1] == false || visitedCell[x + 1][y] == false)
-                if (maze.getCellValue(x, y - 1) == "0" || maze.getCellValue(x + 1, y) == "0") {
+                if (maze.getCellValue(x, y - 1) == 0 || maze.getCellValue(x + 1, y) == 0) {
                     tempM = new MazeState(x + 1, y - 1);
                     tempM.setCost(1.5);
                     temp.add(tempM);
                 }
-        if (inBounds(x - 1, y + 1) && visitedCell[x - 1][y + 1] == false && maze.getCellValue(x - 1, y + 1) == "0") {
-            if (inBounds(x - 1, y) && visitedCell[x - 1][y] == false && maze.getCellValue(x - 1, y) == "0" || inBounds(x, y + 1) && visitedCell[x][y + 1] == false && maze.getCellValue(x, y + 1) == "0") {
+        if (inBounds(x - 1, y + 1) && visitedCell[x - 1][y + 1] == false && maze.getCellValue(x - 1, y + 1) == 0) {
+            if (inBounds(x - 1, y) && visitedCell[x - 1][y] == false && maze.getCellValue(x - 1, y) == 0 || inBounds(x, y + 1) && visitedCell[x][y + 1] == false && maze.getCellValue(x, y + 1) == 0) {
                 tempM = new MazeState(x - 1, y - 1);
                 tempM.setCost(1.5);
                 temp.add(tempM);
@@ -118,7 +118,7 @@ public class SearchableMaze implements ISearchable {
     private MazeState CheckLegal(int x, int y) {
         MazeState tempM;
         if (inBounds(x, y))
-            if (maze.getCellValue(x, y) == "0") {
+            if (maze.getCellValue(x, y) == 0) {
                 tempM = new MazeState(x, y);
                 tempM.setCost(1);
                 return tempM;
