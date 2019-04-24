@@ -29,13 +29,15 @@ public class Maze {
      *Get byte array and build a maze
      */
    public Maze(byte[] byteMaze) {
-       int rows = byteMaze[0] * 256 + byteMaze[1];
-       int cols = byteMaze[2] * 256 + byteMaze[3];
-       myMaze = new int[rows][cols];
        int k = 0;
-       for (; k < 8; k++)
+       int [] tmp=new int[8];
+      for (; k < 8; k++){
            if (byteMaze[k] < 0)
-               byteMaze[k] += 256;
+               tmp[k]=byteMaze[k] + 256;
+           else tmp[k]=byteMaze[k];}
+       int rows = tmp[0] * 256 + tmp[1];
+       int cols = tmp[2] * 256 + tmp[3];
+       myMaze = new int[rows][cols];
        for (int i = 0; i < rows; i++) {
            for (int j = 0; j < cols; j++) {
                myMaze[i][j] = (int) byteMaze[k];
@@ -43,9 +45,9 @@ public class Maze {
            }
        }
        setStartPosition(new Position(0, 0));
-       int actualGoalPosRow = byteMaze[4] * 256 + byteMaze[5];
-       int actualGoalPosCol = byteMaze[6] * 256 + byteMaze[7];
-       setGoalPosition(new Position(actualGoalPosRow, actualGoalPosCol));
+       int GoalPosRow = tmp[4] * 256 + tmp[5];
+       int GoalPosCol = tmp[6] * 256 + tmp[7];
+       setGoalPosition(new Position(GoalPosRow, GoalPosCol));
    }
 
     public Position getStartPosition()
@@ -153,43 +155,6 @@ public class Maze {
     }
 
 
-    //public List<Integer> OneZeroList(){
-    // List<Integer> tmp=new ArrayList<>();
-    // int counter=0;
-    // boolean one=true;
-    // boolean zero=true;
-    // for(int i=0;i<numOfRows();i++)
-    // {
-    //     for(int j=0;j<numOfRows();j++){
 
-    //         if(myMaze[i][j]=="0" && one==true && i != startPosition.getRowIndex() && j != startPosition.getColumnIndex()){
-    //             tmp.add(counter);
-    //             counter=0;
-    //             one=false;
-    //             zero=true;
-
-    //         }
-    //         if(myMaze[i][j]=="0" && zero==true &&i != startPosition.getRowIndex() && j != startPosition.getColumnIndex()){
-    //             counter++;
-    //         }
-
-    //         if(myMaze[i][j]=="1" && zero==true &&i != startPosition.getRowIndex() && j != startPosition.getColumnIndex()){
-    //             tmp.add(counter);
-    //             counter=0;
-    //             one=true;
-    //             zero=false;
-    //         }
-    //         if(myMaze[i][j]=="1" && one==true && i!= startPosition.getRowIndex()  j!= startPosition.getColumnIndex()){
-    //             counter++;
-    //         }
-
-    //     }
-    // }
-    // return tmp;
-    // }
-
-    /*
-     * to string function
-     */
 
 }
