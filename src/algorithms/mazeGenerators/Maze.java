@@ -118,40 +118,37 @@ public class Maze {
      */
 
     public byte[] toByteArray() {
-
         int rows = numOfRows();
-        int rowsNeeded = rows / 256;
-        int rowsModulo = rows % 256;
+        int columns = numOfColumns();
+        int goalPositionColumn = getGoalPosition().getColumnIndex();
+        int goalPositionRow = getGoalPosition().getRowIndex();
 
-        int cols = numOfColumns();
-        int colsNeeded = cols / 256;
-        int colsModulo = cols % 256;
-
-        int goalPosRow = getGoalPosition().getRowIndex();
-        int goalRowsNeeded = goalPosRow / 256;
-        int goalRowsModulo = goalPosRow % 256;
-
-        int goalPosCol = getGoalPosition().getColumnIndex();
-        int goalColsNeeded = goalPosCol / 256;
-        int goalColsModulo = goalPosCol % 256;
+        int rowsNeed = rows / 256;
+        int rowsModulo256 = rows % 256;
+        int columnsNeed = columns / 256;
+        int colsModulo256 = columns % 256;
+        int goalRowsNeed = goalPositionRow / 256;
+        int goalRowsModulo256 = goalPositionRow % 256;
+        int goalColsNeed = goalPositionColumn / 256;
+        int goalColsModulo256 = goalPositionColumn % 256;
 
         //first 8 indexes are for details of maze
-        byte[] mazeAsByteArray = new byte[rows * cols + 8];
-        mazeAsByteArray[0] = (byte) rowsNeeded;
-        mazeAsByteArray[1] = (byte) rowsModulo;
-        mazeAsByteArray[2] = (byte) colsNeeded;
-        mazeAsByteArray[3] = (byte) colsModulo;
-        mazeAsByteArray[4] = (byte) goalRowsNeeded;
-        mazeAsByteArray[5] = (byte) goalRowsModulo;
-        mazeAsByteArray[6] = (byte) goalColsNeeded;
-        mazeAsByteArray[7] = (byte) goalColsModulo;
-        int k = 8;
+        byte[] byteArrayMaze = new byte[rows * columns + 8];
+        byteArrayMaze[0] = (byte) rowsNeed;
+        byteArrayMaze[1] = (byte) rowsModulo256;
+        byteArrayMaze[2] = (byte) columnsNeed;
+        byteArrayMaze[3] = (byte) colsModulo256;
+        byteArrayMaze[4] = (byte) goalRowsNeed;
+        byteArrayMaze[5] = (byte) goalRowsModulo256;
+        byteArrayMaze[6] = (byte) goalColsNeed;
+        byteArrayMaze[7] = (byte) goalColsModulo256;
+        int detailsMaze = 8;
         for (int i = 0; i < myMaze.length; i++)
             for (int j = 0; j < myMaze[0].length; j++) {
-                mazeAsByteArray[k] = (byte) myMaze[i][j];
-                k++;
+                byteArrayMaze[detailsMaze] = (byte) myMaze[i][j];
+                detailsMaze++;
             }
-        return mazeAsByteArray;
+        return byteArrayMaze;
     }
 
 
