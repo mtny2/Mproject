@@ -93,9 +93,9 @@ public class Server {
                 if (ins == null) {
                     ops = new FileOutputStream("resources/config.properties");
 
-                    prop.setProperty("Maze", "MyMazeGenerator");//generate algo
-                    prop.getProperty("NumOfCores", "2");//num of cores
-                    prop.setProperty("MazeAlgorithm", "BestFirstSearch");
+                    prop.setProperty("MazeGenerator","MyMazeGenerator");//generate algo
+                    prop.getProperty("NumOfCores","2");//num of cores
+                    prop.setProperty("MazeAlgorithm","BestFirstSearch");
 
                     prop.store(ops, null);
                 }
