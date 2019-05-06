@@ -35,10 +35,10 @@ public class Server {
             serverSocket.setSoTimeout(listeningInterval);
             Properties prop = new Properties();
             InputStream input;
-            File file = new File("config.properties");
+            File file = new File("resources/config.properties");
             int cores = 0;
             if (file.length() != 0) { //if properties file empty, and hasn't been run yet
-                input = new FileInputStream("config.properties");
+                input = new FileInputStream("resources/config.properties");
 
                 prop.load(input); // load a properties file
                 cores = Integer.parseInt(prop.getProperty("numberCores")); //get number of cores from config file
@@ -91,7 +91,7 @@ public class Server {
                 if (ins == null) {
                     ops = new FileOutputStream("resources/config.properties");
                     prop.setProperty("MazeGenerator", "SimpleMazeGenerator");//generate algo
-                    prop.getProperty("NumOfCores", "2");//num of cores
+                    prop.setProperty("numberCores", "2");//num of cores
                     prop.setProperty("MazeAlgorithmSearch", "BreadFirstSearch");
                     prop.store(ops, null);
                 }

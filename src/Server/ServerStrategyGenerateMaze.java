@@ -16,13 +16,12 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try {
-
             ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
             ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
             ByteArrayOutputStream toClientArray = new ByteArrayOutputStream();
             OutputStream ops = new MyCompressorOutputStream(toClientArray);
             toClient.flush();
-            Properties prop = new Properties();
+            Properties properties = new Properties();
             File configFile = new File("resources/config.properties");
 
             String generatorStr;
@@ -31,9 +30,9 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             if (configFile.length() != 0) {
                 InputStream input = new FileInputStream("resources/config.properties");
                 // load a properties file
-                prop.load(input);
+                properties.load(input);
                 //check the generator type from config file.
-                generatorStr = prop.getProperty("MazeGenerator"); //get algorithm type from config file
+                generatorStr = properties.getProperty("MazeGenerator"); //get algorithm type from config file
                 if (generatorStr.equals("SimpleMazeGenerator"))
                     generatorMaze = new SimpleMazeGenerator();
                 else if (generatorStr.equals("EmptyMazeGenerator"))
