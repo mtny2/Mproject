@@ -1,9 +1,5 @@
 package Server;
 
-import Server.IServerStrategy;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -18,7 +14,6 @@ public class Server {
     private int listeningInterval;
     private IServerStrategy serverStrategy;
     private volatile boolean stop;
-    //  private static final Logger LOG = LogManager.getLogger(); //Log4j2
 
     public Server(int port, int listeningInterval, IServerStrategy serverStrategy) {
         this.port = port;
@@ -26,8 +21,7 @@ public class Server {
         this.serverStrategy = serverStrategy;
     }
 
-    //  public Server(int port, int listeningInterval, Server.ServerStrategySolveSearchProblem serverStrategySolveSearchProblem) {
-    // }
+
 
     public void start() {
         new Thread(() -> {
@@ -40,9 +34,9 @@ public class Server {
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningInterval);
             Properties prop = new Properties();
-            InputStream input = null;
+            InputStream input;
             File file = new File("config.properties");
-            int cores = 0;
+            int cores = 2;
             if (file.length() != 0) { //if properties file empty, and hasn't been run yet
                 input = new FileInputStream("config.properties");
                // input.
@@ -71,11 +65,11 @@ public class Server {
 
     private void handleClient(Socket clientSocket) {
         try {
-            //  LOG.info(String.format("Handling client with socket: %s", clientSocket.toString()));
+            System.out.println(String.format("Handling client with socket: %s", clientSocket.toString()));
             serverStrategy.serverStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
             clientSocket.close();
         } catch (IOException e) {
-            //   LOG.error("IOException", e);
+            e.getStackTrace();
         }
     }
 
@@ -86,17 +80,15 @@ public class Server {
     public static class Configurations {
         public static void config() {
             OutputStream ops = null;
-            InputStream ins = null;
+            InputStream ins;
             try {
                 ins = Server.class.getClassLoader().getResourceAsStream("resources/config.properties");//load the file if exist
                 Properties prop = new Properties();
                 if (ins == null) {
                     ops = new FileOutputStream("resources/config.properties");
-
-                    prop.setProperty("Maze", "MyMazeGenerator");//generate algo
+                    prop.setProperty("MazeGenerator", "MyMazeGenerator");//generate algo
                     prop.getProperty("NumOfCores", "2");//num of cores
-                    prop.setProperty("MazeAlgorithm", "BestFirstSearch");
-
+                    prop.setProperty("MazeAlgorithmSearch", "BreadFirstSearch");
                     prop.store(ops, null);
                 }
             } catch (IOException e) {

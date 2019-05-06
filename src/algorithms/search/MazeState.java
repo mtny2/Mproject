@@ -1,11 +1,13 @@
 package algorithms.search;
 
+import java.io.Serializable;
+
 /**
  * MazeState extends AState
  * Object the contains row and column
  * equals function - equable function to compare between mazeState's
  */
-public class MazeState extends AState {
+public class MazeState extends AState implements Serializable {
 
     private int row;
     private int col;

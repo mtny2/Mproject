@@ -1,6 +1,7 @@
 package algorithms.mazeGenerators;
+import java.io.Serializable;
 
-public class Maze {
+public class Maze implements Serializable {
     /**
      * Maze Class actualize
      *
