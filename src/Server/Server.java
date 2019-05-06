@@ -90,9 +90,9 @@ public class Server {
                 Properties prop = new Properties();
                 if (ins == null) {
                     ops = new FileOutputStream("resources/config.properties");
-                    prop.setProperty("MazeGenerator", "SimpleMazeGenerator");//generate algo
+                    prop.setProperty("MazeGenerator", "EmptyMazeGenerator");//generate algo
                     prop.setProperty("numberCores", "2");//num of cores
-                    prop.setProperty("MazeAlgorithmSearch", "BreadFirstSearch");
+                    prop.setProperty("MazeAlgorithmSearch", "BreadthFirstSearch");
                     prop.store(ops, null);
                 }
             } catch (IOException e) {

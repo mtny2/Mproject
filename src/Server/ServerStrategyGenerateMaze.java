@@ -27,7 +27,9 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             String generatorStr;
             IMazeGenerator generatorMaze;
             //if properties file empty, and has not been run yet
-            if (configFile.length() != 0) {
+            if (configFile.length() == 0)
+                Server.Configurations.config();
+
                 InputStream input = new FileInputStream("resources/config.properties");
                 // load a properties file
                 properties.load(input);
@@ -39,10 +41,9 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
                     generatorMaze = new EmptyMazeGenerator();
                 else
                     generatorMaze = new MyMazeGenerator();
-            } else {
-                Server.Configurations.config();
-                generatorMaze = new MyMazeGenerator(); //MyMazeGenerator - default
-            }
+            //} else {
+               // generatorMaze = new MyMazeGenerator(); //MyMazeGenerator - default
+
             //get maze size
             int[] mazeSize = (int[]) fromClient.readObject();
             int row = mazeSize[0];
