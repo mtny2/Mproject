@@ -34,8 +34,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
 
             File file = new File(tempDirectoryPath, fileName); //create file from maze name
             if (file.exists()) { //if it exist , solve gets the maze data
-                FileInputStream fIn = new FileInputStream(file);
-                ObjectInputStream FileToReturn = new ObjectInputStream(fIn);
+                FileInputStream fileInput = new FileInputStream(file);
+                ObjectInputStream FileToReturn = new ObjectInputStream(fileInput);
                 solve = (Solution) FileToReturn.readObject();
                 FileToReturn.close();
             } else {

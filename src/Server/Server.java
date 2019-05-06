@@ -36,15 +36,22 @@ public class Server {
             Properties prop = new Properties();
             InputStream input;
             File file = new File("config.properties");
-            int cores = 2;
+            int cores = 2;//default
             if (file.length() != 0) { //if properties file empty, and hasn't been run yet
                 input = new FileInputStream("config.properties");
-               // input.
+
                 prop.load(input); // load a properties file
                 cores = Integer.parseInt(prop.getProperty("numberCores")); //get number of cores from config file
             } else Server.Configurations.config();
+
+            int threadPoolSize = Runtime.getRuntime().availableProcessors() * cores;
             ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-            threadPool.setCorePoolSize(Runtime.getRuntime().availableProcessors() * cores);
+            threadPool.setCorePoolSize(threadPoolSize);
+
+
+
+            //ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+          //  threadPool.setCorePoolSize(Runtime.getRuntime().availableProcessors() * cores);
 
             while (!stop) {
                 try {
