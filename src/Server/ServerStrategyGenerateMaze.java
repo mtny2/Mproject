@@ -11,7 +11,9 @@ import java.util.Properties;
  * server strategy GenerateMaze class implements IServerStrategy
  * Get size of maze, create maze and than compress and sent to client
  */
+
 public class ServerStrategyGenerateMaze implements IServerStrategy {
+    private static String pathResources = "resources/config.properties";
 
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
@@ -22,15 +24,14 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             OutputStream ops = new MyCompressorOutputStream(toClientArray);
             toClient.flush();
             Properties properties = new Properties();
-            File configFile = new File("resources/config.properties");
-
+            File configFile = new File(pathResources);
             String generatorStr;
             IMazeGenerator generatorMaze;
             //if properties file empty, and has not been run yet
             if (configFile.length() == 0)
                 Server.Configurations.config();
 
-                InputStream input = new FileInputStream("resources/config.properties");
+                InputStream input = new FileInputStream(pathResources);
                 // load a properties file
                 properties.load(input);
                 //check the generator type from config file.
@@ -58,6 +59,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             toClient.flush();
         } catch (IOException |
                 ClassNotFoundException |
+
                 NumberFormatException e) {
             e.printStackTrace();
         }
