@@ -118,7 +118,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
     class MyFilter implements FilenameFilter {
         @Override
         public boolean accept(File dir, String name) {
-            return name.startsWith("algorithms");
+            return name.contains("maze");
         }
     }
 
