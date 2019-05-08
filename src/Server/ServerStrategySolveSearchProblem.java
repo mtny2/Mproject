@@ -39,7 +39,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             File mazeFileCreate = new File(dir, mazeName);
 
             File dirTemp = new File(dir);
-            File[] list = dirTemp.listFiles();
+            File[] list = dirTemp.listFiles(new MyFilter());
             boolean areMazesEquals = false, solReturned=false;
             if (list != null) {
                 //if(!areMazesEquals)
@@ -114,4 +114,14 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         }
 
     }
+
+    class MyFilter implements FilenameFilter {
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.startsWith("algorithms");
+        }
+    }
+
+
+
 }
