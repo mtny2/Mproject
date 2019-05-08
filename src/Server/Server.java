@@ -10,11 +10,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 public class Server {
+    private static String pathResources = "resources/config.properties";
     private int port;
     private int listeningInterval;
     private IServerStrategy serverStrategy;
     private volatile boolean stop;
-    private static String pathResources = "resources/config.properties";
 
 
     public Server(int port, int listeningInterval, IServerStrategy serverStrategy) {
@@ -22,7 +22,6 @@ public class Server {
         this.listeningInterval = listeningInterval;
         this.serverStrategy = serverStrategy;
     }
-
 
 
     public void start() {
@@ -45,9 +44,9 @@ public class Server {
                 prop.load(input); // load a properties file
                 cores = Integer.parseInt(prop.getProperty("numberCores")); //get number of cores from config file
             } else Server.Configurations.config();
-                if(cores<=0)
-                    cores=2;//default
-                    int threadPoolSize = Runtime.getRuntime().availableProcessors() * cores;
+            if (cores <= 0)
+                cores = 2;//default
+            int threadPoolSize = Runtime.getRuntime().availableProcessors() * cores;
             ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
             threadPool.setCorePoolSize(threadPoolSize);
 
@@ -56,7 +55,8 @@ public class Server {
                 try {
                     Socket clientSocket = serverSocket.accept(); // blocking call
                     threadPool.submit(new Thread(() -> {
-                        handleClient(clientSocket);}));
+                        handleClient(clientSocket);
+                    }));
                 } catch (SocketTimeoutException e) {
                     e.getStackTrace();
                     stop();
@@ -108,10 +108,6 @@ public class Server {
                     }
                 }
             }
-
-
         }
-
-
     }
 }

@@ -40,38 +40,39 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
 
             File dirTemp = new File(dir);
             File[] list = dirTemp.listFiles(new MyFilter());
-            boolean areMazesEquals = false, solReturned=false;
+            boolean areMazesEquals = false, solReturned = false;
             if (list != null) {
                 //if(!areMazesEquals)
                 for (File filMaze : list) {
-                    if(!solReturned)
-                    if (filMaze.getName().contains("Maze")) {
-                        byte savedMazeBytes[];
-                        // try {
-                        //read maze from file
-                        InputStream in = new MyDecompressorInputStream(new FileInputStream(filMaze));
-                        //  byte m[] =maze.toByteArray();
-                        // int x=m.length;
-                        savedMazeBytes = new byte[tempByteArray.length];
-                        in.read(savedMazeBytes);
-                        in.close();
-                        areMazesEquals = Arrays.equals(savedMazeBytes, tempByteArray);
-                        if (areMazesEquals) {
-                            for (File filSol : list) {
-                                if (filSol.getName().equals("mazeSol-"+filMaze.getName().substring(31))) {
-                                    FileInputStream fileInput = new FileInputStream(filSol);
-                                    ObjectInputStream FileToReturn = new ObjectInputStream(fileInput);
-                                    sol = (Solution) FileToReturn.readObject();
-                                    FileToReturn.close();
-                                    solReturned=true;
-                                    break;
+                    if (!solReturned)
+                        if (filMaze.getName().contains("Maze")) {
+                            byte savedMazeBytes[];
+                            // try {
+                            //read maze from file
+                            InputStream in = new MyDecompressorInputStream(new FileInputStream(filMaze));
+                            //  byte m[] =maze.toByteArray();
+                            // int x=m.length;
+                            savedMazeBytes = new byte[tempByteArray.length];
+                            in.read(savedMazeBytes);
+                            in.close();
+                            areMazesEquals = Arrays.equals(savedMazeBytes, tempByteArray);
+                            if (areMazesEquals) {
+                                for (File filSol : list) {
+                                    if (filSol.getName().equals("mazeSol-" + filMaze.getName().substring(31))) {
+                                        FileInputStream fileInput = new FileInputStream(filSol);
+                                        ObjectInputStream FileToReturn = new ObjectInputStream(fileInput);
+                                        sol = (Solution) FileToReturn.readObject();
+                                        FileToReturn.close();
+                                        solReturned = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
                 }
 
-            } if(!areMazesEquals || list==null) {
+            }
+            if (!areMazesEquals || list == null || !solReturned) {
                 String algSearch;
                 SearchableMaze searchableMaze = new SearchableMaze(mazeToClient); // create a new searchable maze
                 ASearchingAlgorithm algorithmSolve;
@@ -121,7 +122,6 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             return name.contains("maze");
         }
     }
-
 
 
 }

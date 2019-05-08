@@ -27,6 +27,6 @@ public class Solution implements Serializable {
     }
 
     public String toString() {
-        return " ";
+        return "";
     }
 }
