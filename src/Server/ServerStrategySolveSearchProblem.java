@@ -37,12 +37,13 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
 
             File dirTemp = new File(dir);
             File[] list = dirTemp.listFiles();
-            boolean areMazesEquals = false;
+            boolean areMazesEquals = false, solReturned=false;
             if (list != null) {
                 //if(!areMazesEquals)
                 for (File filMaze : list) {
+                    if(!solReturned)
                     if (filMaze.getName().contains("Maze")) {
-                        byte savedMazeBytes[];  // דד
+                        byte savedMazeBytes[];
                         // try {
                         //read maze from file
                         InputStream in = new MyDecompressorInputStream(new FileInputStream(filMaze));
@@ -55,10 +56,11 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                         if (areMazesEquals) {
                             for (File filSol : list) {
                                 if (filSol.getName().equals("mazeSol-"+filMaze.getName().substring(31))) {
-                                    FileInputStream fileInput = new FileInputStream(SolFileCreate);
+                                    FileInputStream fileInput = new FileInputStream(filSol);
                                     ObjectInputStream FileToReturn = new ObjectInputStream(fileInput);
                                     sol = (Solution) FileToReturn.readObject();
                                     FileToReturn.close();
+                                    solReturned=true;
                                     break;
                                 }
                             }
