@@ -13,12 +13,15 @@ import java.util.Arrays;
 import java.util.Properties;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
+
+    private static String pathResources = "resources/config.properties";
+
     @Override
     public void serverStrategy(InputStream inputStream, OutputStream outputStream) {
         try {
             Properties properties = new Properties();
             InputStream input;
-            File configFile = new File("resources/config.properties");
+            File configFile = new File(pathResources);
             ObjectInputStream fromClient = new ObjectInputStream(inputStream);
             ObjectOutputStream toClient = new ObjectOutputStream(outputStream);
             toClient.flush();
@@ -42,7 +45,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                 //if(!areMazesEquals)
                 for (File filMaze : list) {
                     if (filMaze.getName().contains("Maze")) {
-                        byte savedMazeBytes[];  // דד
+                        byte savedMazeBytes[];
                         // try {
                         //read maze from file
                         InputStream in = new MyDecompressorInputStream(new FileInputStream(filMaze));
@@ -73,7 +76,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                 if (configFile.length() == 0)  //if properties file empty, and has not been run yet
                     Server.Configurations.config();
 
-                input = new FileInputStream("resources/config.properties");
+                input = new FileInputStream(pathResources);
                 // load a properties file
                 properties.load(input);
                 algSearch = properties.getProperty("MazeAlgorithmSearch"); //get algorithm type from config file

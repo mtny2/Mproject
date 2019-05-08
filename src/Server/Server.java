@@ -14,6 +14,8 @@ public class Server {
     private int listeningInterval;
     private IServerStrategy serverStrategy;
     private volatile boolean stop;
+    private static String pathResources = "resources/config.properties";
+
 
     public Server(int port, int listeningInterval, IServerStrategy serverStrategy) {
         this.port = port;
@@ -35,10 +37,10 @@ public class Server {
             serverSocket.setSoTimeout(listeningInterval);
             Properties prop = new Properties();
             InputStream input;
-            File file = new File("resources/config.properties");
+            File file = new File(pathResources);
             int cores = 0;
             if (file.length() != 0) { //if properties file empty, and hasn't been run yet
-                input = new FileInputStream("resources/config.properties");
+                input = new FileInputStream(pathResources);
 
                 prop.load(input); // load a properties file
                 cores = Integer.parseInt(prop.getProperty("numberCores")); //get number of cores from config file
@@ -86,10 +88,10 @@ public class Server {
             OutputStream ops = null;
             InputStream ins;
             try {
-                ins = Server.class.getClassLoader().getResourceAsStream("resources/config.properties");//load the file if exist
+                ins = Server.class.getClassLoader().getResourceAsStream(pathResources);//load the file if exist
                 Properties prop = new Properties();
                 if (ins == null) {
-                    ops = new FileOutputStream("resources/config.properties");
+                    ops = new FileOutputStream(pathResources);
                     prop.setProperty("MazeGenerator", "EmptyMazeGenerator");//generate algo
                     prop.setProperty("numberCores", "2");//num of cores
                     prop.setProperty("MazeAlgorithmSearch", "BreadthFirstSearch");
