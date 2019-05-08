@@ -25,4 +25,8 @@ public class Solution implements Serializable {
     public ArrayList<AState> getSolutionPath() {
         return solution;
     }
+
+    public String toString() {
+        return " ";
+    }
 }
