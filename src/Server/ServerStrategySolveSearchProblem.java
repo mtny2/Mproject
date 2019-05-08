@@ -42,7 +42,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                 //if(!areMazesEquals)
                 for (File filMaze : list) {
                     if (filMaze.getName().contains("Maze")) {
-                        byte savedMazeBytes[];
+                        byte savedMazeBytes[];  // דד
                         // try {
                         //read maze from file
                         InputStream in = new MyDecompressorInputStream(new FileInputStream(filMaze));
