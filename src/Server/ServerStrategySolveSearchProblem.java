@@ -76,8 +76,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                 String algSearch;
                 SearchableMaze searchableMaze = new SearchableMaze(mazeToClient); // create a new searchable maze
                 ASearchingAlgorithm algorithmSolve;
-                if (configFile.length() == 0)  //if properties file empty, and has not been run yet
-                    Server.Configurations.config();
+                //   if (configFile.length() == 0)  //if properties file empty, and has not been run yet
+                Server.Configurations.config();
 
                 input = new FileInputStream(pathResources);
                 // load a properties file

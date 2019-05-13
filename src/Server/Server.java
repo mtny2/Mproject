@@ -38,12 +38,13 @@ public class Server {
             InputStream input;
             File file = new File(pathResources);
             int cores = 0;
-            if (file.length() != 0) { //if properties file empty, and hasn't been run yet
-                input = new FileInputStream(pathResources);
+            //     if (file.length() != 0) {
+            Server.Configurations.config();//if properties file empty, and hasn't been run yet
+            input = new FileInputStream(pathResources);
 
-                prop.load(input); // load a properties file
-                cores = Integer.parseInt(prop.getProperty("numberCores")); //get number of cores from config file
-            } else Server.Configurations.config();
+            prop.load(input); // load a properties file
+            cores = Integer.parseInt(prop.getProperty("numberCores")); //get number of cores from config file
+            //   } else Server.Configurations.config();
             if (cores <= 0)
                 cores = 2;//default
             int threadPoolSize = Runtime.getRuntime().availableProcessors() * cores;
@@ -92,7 +93,7 @@ public class Server {
                 Properties prop = new Properties();
                 if (ins == null) {
                     ops = new FileOutputStream(pathResources);
-                    prop.setProperty("MazeGenerator", "EmptyMazeGenerator");//generate algo
+                    prop.setProperty("MazeGenerator", "MyMazeGenerator");//generate algo
                     prop.setProperty("numberCores", "2");//num of cores
                     prop.setProperty("MazeAlgorithmSearch", "BreadthFirstSearch");
                     prop.store(ops, null);
