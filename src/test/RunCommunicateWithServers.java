@@ -29,15 +29,15 @@ public class RunCommunicateWithServers {
         mazeGeneratingServer.start();
         //stringReverserServer.start();
 
-     //  for (int i = 0; i < 6; i++) {
-     //      Thread t = new Thread1();
-     //      t.start();
-     //      try {
-     //          t.join();
-     //      } catch (InterruptedException e) {
-     //          e.printStackTrace();
-     //      }
-     //  }
+  //    for (int i = 0; i < 6; i++) {
+  //        Thread t = new Thread1();
+  //        t.start();
+  //        try {
+  //            t.join();
+  //        } catch (InterruptedException e) {
+  //            e.printStackTrace();
+  //        }
+  //    }
 
         //Communicating with servers
         CommunicateWithServer_MazeGenerating();

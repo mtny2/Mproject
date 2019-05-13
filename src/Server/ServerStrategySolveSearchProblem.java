@@ -99,11 +99,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                 objectReturn.writeObject(sol);
                 objectReturn.flush();
 
-                OutputStream out = new MyCompressorOutputStream(new FileOutputStream(mazeFileCreate));
-                out.write(tempByteArray);
-                out.flush();
-                out.close();
 
+                mazeToDir(mazeFileCreate,tempByteArray);
 
             }
             toClient.writeObject(sol);
@@ -114,6 +111,17 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             e.printStackTrace();
         }
 
+    }
+
+    public synchronized void mazeToDir(File f,byte[] b){
+        try {
+            OutputStream out = new MyCompressorOutputStream(new FileOutputStream(f));
+            out.write(b);
+            out.flush();
+            out.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     class MyFilter implements FilenameFilter {
