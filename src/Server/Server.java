@@ -31,6 +31,7 @@ public class Server {
     }
 
     private void serverStrategy() {
+
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningInterval);
@@ -60,10 +61,8 @@ public class Server {
                     }));
                 } catch (SocketTimeoutException e) {
                     e.getStackTrace();
-                    stop();
                 }
             }
-            serverSocket.close();
             threadPool.shutdown();
         } catch (IOException e) {
             e.getStackTrace();
