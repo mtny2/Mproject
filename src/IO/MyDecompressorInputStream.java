@@ -3,22 +3,28 @@ package IO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+/**
+ * Client MyDecompressorInputStream extends OutputStream
+ * Decompressor byte array -
+ * Take each time byte number and convert them to a 8 char`s.
+ */
 
 public class MyDecompressorInputStream extends InputStream {
 
     private InputStream in;
 
-    public MyDecompressorInputStream(InputStream ips) {
+    public MyDecompressorInputStream(InputStream ips)
+    {
         in = ips;
     }
 
+    // Until the file not empty, read from it
     public int read(byte[] b) throws IOException{
         ArrayList<Byte> fromFile = new ArrayList<>();
-        // Until the file not empty, read from it
             while (in.available() > 0)
                 fromFile.add((byte) in.read());
             
-        // read the details 
+        // read the details of the maze.
         for (int i = 0; i < 8; i++) {
             b[i] = fromFile.remove(0);
         }
@@ -49,12 +55,12 @@ public class MyDecompressorInputStream extends InputStream {
         return 0;
     }
 
-
+    // Overwrite
     public int read() {
         return 0;
     }
 
-    // gets byte bet it in a binary vector
+    //Get byte number and convert it to binary vector
     private byte[] ByteToBinary(int b) {
         int Byte = b;
         if (Byte < 0)

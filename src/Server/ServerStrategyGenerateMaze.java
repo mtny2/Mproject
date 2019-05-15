@@ -13,54 +13,44 @@ import java.util.Properties;
  */
 
 public class ServerStrategyGenerateMaze implements IServerStrategy {
-    private static String pathResources = "resources/config.properties";
+    private static String pathResources = "./resources/config.properties";
 
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try {
+            // Connections
             ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
             ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
             ByteArrayOutputStream toClientArray = new ByteArrayOutputStream();
             OutputStream ops = new MyCompressorOutputStream(toClientArray);
             toClient.flush();
             Properties properties = new Properties();
-            File configFile = new File(pathResources);
             String generatorStr;
             IMazeGenerator generatorMaze;
-            //if properties file empty, and has not been run yet
-          //  if (configFile.length() == 0)
-                Server.Configurations.config();
-
-                InputStream input = new FileInputStream(pathResources);
-                // load a properties file
-                properties.load(input);
-                //check the generator type from config file.
-                generatorStr = properties.getProperty("MazeGenerator"); //get algorithm type from config file
-                if (generatorStr.equals("SimpleMazeGenerator"))
-                    generatorMaze = new SimpleMazeGenerator();
-                else if (generatorStr.equals("EmptyMazeGenerator"))
-                    generatorMaze = new EmptyMazeGenerator();
-                else
-                    generatorMaze = new MyMazeGenerator();
-            //} else {
-               // generatorMaze = new MyMazeGenerator(); //MyMazeGenerator - default
-
+            // load a properties file and get the generator type
+            Configurations.config();
+            InputStream input = new FileInputStream(pathResources);
+            properties.load(input);
+            generatorStr = properties.getProperty("MazeGenerator");
+            if (generatorStr.equals("SimpleMazeGenerator"))
+                generatorMaze = new SimpleMazeGenerator();
+            else if (generatorStr.equals("EmptyMazeGenerator"))
+                generatorMaze = new EmptyMazeGenerator();
+            else
+                generatorMaze = new MyMazeGenerator();// default maze generator is "MyMazeGenerator"
             //get maze size
             int[] mazeSize = (int[]) fromClient.readObject();
-            int row = mazeSize[0];
-            int col = mazeSize[1];
-            // create maze and make him byte array and then compress the maze.
-            Maze returnToClient = generatorMaze.generate(row, col);
+            int rows = mazeSize[0];
+            int columns = mazeSize[1];
+            Maze returnToClient = generatorMaze.generate(rows, columns);
             byte[] ReturnMaze = returnToClient.toByteArray();
             ops.write(ReturnMaze);
-            //write back to client
             toClient.writeObject(toClientArray.toByteArray());
+            // Flushes the output stream and forces any buffered output bytes to be written out.
             ops.flush();
             toClient.flush();
-        } catch (IOException |
-                ClassNotFoundException |
-
-                NumberFormatException e) {
+        //Exceptions
+        } catch (IOException | ClassNotFoundException |NumberFormatException e) {
             e.printStackTrace();
         }
     }

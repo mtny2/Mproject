@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact name="Part2Finish:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Part2Finish_jar</output-path>
+  <artifact name="ATPProjectJAR:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ATPProjectJAR_jar</output-path>
     <root id="root">
       <element id="archive" name="Part2Finish.jar">
         <element id="module-output" name="Part2Finish" />

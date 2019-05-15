@@ -3,14 +3,17 @@ package IO;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
+/**
+ * Client MyCompressorOutputStream extends OutputStream
+ * Compressor byte array -
+ * Take each time 8 char`s and convert them to a byte number
+ */
 public class MyCompressorOutputStream extends OutputStream {
     private OutputStream out;
 
 
-    public MyCompressorOutputStream(OutputStream OPS) {
-
-        out = OPS;
+    public MyCompressorOutputStream(OutputStream ops) {
+        out = ops;
     }
 
     public void write(byte[] b) throws IOException {
@@ -33,7 +36,8 @@ public class MyCompressorOutputStream extends OutputStream {
             if (counter == 8) {
                 byte byteToAdd = binaryToByte(tempByte);
                 listByte.add(byteToAdd);
-            } else {//the maze is not n*n,there we will check the long of the binary we will convert to byte
+                //the maze is not n*n,there we will check the long of the binary we will convert to byte
+            } else {
                 byte[] tempSmallByte = new byte[b.length % 8];
                 for (int j = 0; j < tempSmallByte.length; j++)
                     tempSmallByte[j] = tempByte[j];
@@ -61,6 +65,7 @@ public class MyCompressorOutputStream extends OutputStream {
         return b;
     }
 
+    // take 8 and convert
     private byte binaryToByte(byte[] binaryArray) {
         int byteNum = 0;
         double power = 0;

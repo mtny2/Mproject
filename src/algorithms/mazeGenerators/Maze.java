@@ -112,10 +112,9 @@ public class Maze implements Serializable {
 
 
     /**
-     --------- Part B ----------
-     *
+     Part B :
      * Converts this maze to byte array.
-     *
+     * We write all the maze to byte array
      */
 
     public byte[] toByteArray() {

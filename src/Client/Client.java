@@ -3,6 +3,11 @@ package Client;
 import java.net.InetAddress;
 import java.net.Socket;
 
+/**
+ * Client class
+ * Connect the server to the client
+ * serverIP, serverPort, clientStrategy
+ */
 
 public class Client {
     private InetAddress serverIP;
